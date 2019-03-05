@@ -4,9 +4,11 @@ export default [
     checked: true
   },
   {
-    label: `Future`
+    label: `Future`,
+    checked: false
   },
   {
-    label: `Past`
+    label: `Past`,
+    checked: false
   }
 ];

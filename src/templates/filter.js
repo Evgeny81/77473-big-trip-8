@@ -1,4 +1,4 @@
-export default function ({checked, label}) {
+export default ({checked, label}) => {
   const lowercasedLabel = label.toLowerCase();
   return `<input
             type="radio"  
@@ -13,4 +13,4 @@ export default function ({checked, label}) {
             ${label.toUpperCase()}
           </label>
   `;
-}
+};
