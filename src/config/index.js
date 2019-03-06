@@ -1,3 +1,4 @@
-import filters from './filters';
+import filtersConfig from './filters';
+import pointsConfig from './points';
 
-export {filters};
+export {filtersConfig, pointsConfig};

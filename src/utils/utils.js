@@ -6,9 +6,17 @@ export const getAllElements = (selector) => (
   document.querySelectorAll(selector)
 );
 
-const getRandomInt = (min, max) => (
-  Math.floor(Math.random() * (max - min)) + min
+export const getRandomInt = (min = 0, max = 2) => (
+  Math.floor(Math.random() * (max + 1 - min)) + min
 );
+
+export const anyOf = (array, length = 0) => {
+  const selectedValues = new Set();
+  while (selectedValues.size <= length) {
+    selectedValues.add(array[getRandomInt(0, array.length - 1)]);
+  }
+  return [...selectedValues];
+};
 
 export const renderElement = (parent, element, config = getRandomInt(3, 7)) => {
   const elementsQuantity = Array.isArray(config) ? config.length : config;
@@ -18,4 +26,12 @@ export const renderElement = (parent, element, config = getRandomInt(3, 7)) => {
         element(config[i])
     );
   }
+};
+
+export const createRandomConfigs = (config, quantity) => {
+  const configs = [];
+  for (let i = 0; i < quantity; i++) {
+    configs.push(config());
+  }
+  return configs;
 };
