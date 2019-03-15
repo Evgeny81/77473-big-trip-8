@@ -1,5 +1,5 @@
-export const getElement = (selector) => (
-  document.querySelector(selector)
+export const getElement = (container, selector) => (
+  container.querySelector(selector)
 );
 
 export const getAllElements = (selector) => (
@@ -34,4 +34,10 @@ export const createRandomConfigs = (config, quantity) => {
     configs.push(config());
   }
   return configs;
+};
+
+export const createElement = (template) => {
+  const wrapper = document.createElement(`div`);
+  wrapper.innerHTML = template;
+  return wrapper.firstChild;
 };
