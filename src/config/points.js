@@ -15,7 +15,7 @@ export default () => ({
     restaurant: `🍴`
   },
   picture: `http://picsum.photos/300/150?r=${Math.random()}`,
-  offer: anyOf([`Add luggage`, `Switch to comfort class`, `Add meal`, `Choose seats`], getRandomInt()),
+  offers: anyOf([`Add luggage`, `Switch to comfort class`, `Add meal`, `Choose seats`], getRandomInt()),
   description: anyOf([`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
     `Cras aliquet varius magna, non porta ligula feugiat eget.`,
     `Fusce tristique felis at fermentum pharetra.`,
@@ -28,7 +28,7 @@ export default () => ({
     `In rutrum ac purus sit amet tempus.`], getRandomInt(1, 3)).join(``),
   date: Date.now() + getRandomInt(0, 7) * 24 * 60 * 60 * 1000 * getRandomInt(-1, 2),
   duration: getRandomInt(0, 5),
-  price: `$ ${getRandomInt(1, 200)}`,
+  price: ` $ ${getRandomInt(1, 200)}`,
   timeHours: `${getRandomInt(0, 11)}h`,
   timeMinutes: `${getRandomInt(0, 59)}m`
 });
