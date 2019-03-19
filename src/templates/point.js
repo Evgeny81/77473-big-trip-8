@@ -1,12 +1,4 @@
-import {getRandomInt} from '../utils';
-
-export default ({type, icon, price, timeHours, timeMinutes}) => {
-  const startDate = new Date();
-  const endDate = new Date();
-  startDate.setHours(getRandomInt(0, 23));
-  startDate.setMinutes(getRandomInt(0, 59));
-  endDate.setHours(startDate.getHours() + parseInt(timeHours, 10));
-  endDate.setMinutes(startDate.getMinutes() + parseInt(timeMinutes, 10));
+export default ({type, icon, price, timeHours, timeMinutes, startDate, endDate}) => {
   return `<article class="trip-point">
           <i class="trip-icon">${icon[type]}</i>
           <h3 class="trip-point__title">${type}</h3>

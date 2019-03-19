@@ -1,4 +1,16 @@
-import {anyOf, getRandomInt} from '../utils';
+import {anyOf, getRandomInt} from '../utils/utils';
+
+function createRandomDate() {
+  const startDate = new Date();
+  const endDate = new Date();
+  const timeHours = `${getRandomInt(0, 11)}h`;
+  const timeMinutes = `${getRandomInt(0, 59)}m`;
+  startDate.setHours(getRandomInt(0, 23));
+  startDate.setMinutes(getRandomInt(0, 59));
+  endDate.setHours(startDate.getHours() + parseInt(timeHours, 10));
+  endDate.setMinutes(startDate.getMinutes() + parseInt(timeMinutes, 10));
+  return {startDate, endDate};
+}
 
 export default () => ({
   type: anyOf([`taxi`, `bus`, `train`, `ship`, `transport`, `drive`, `flight`, `checkin`, `sightseeing`, `restaurant`]).join(``),
@@ -30,5 +42,7 @@ export default () => ({
   duration: getRandomInt(0, 5),
   price: ` $ ${getRandomInt(1, 200)}`,
   timeHours: `${getRandomInt(0, 11)}h`,
-  timeMinutes: `${getRandomInt(0, 59)}m`
+  timeMinutes: `${getRandomInt(0, 59)}m`,
+  startDate: createRandomDate().startDate,
+  endDate: createRandomDate().endDate
 });

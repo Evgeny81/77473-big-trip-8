@@ -1,5 +1,5 @@
 import openPointTemplate from '../templates/open-point';
-import {createElement} from '../utils/utils';
+import {createElement, getElement} from '../utils/utils';
 
 export class OpenPoint {
   constructor(data) {
@@ -9,6 +9,7 @@ export class OpenPoint {
     this.picture = data.picture;
     this._element = null;
     this._onSubmit = null;
+    this._onSubmitClick = this._onSubmitClick.bind(this);
   }
 
   set onSubmit(fn) {
@@ -21,11 +22,14 @@ export class OpenPoint {
   }
 
   _bind() {
-    this._element
-      .addEventListener(`click`, this._onSubmitClick.bind(this));
+    getElement(this._element, `.point__button--save`)
+      .addEventListener(`click`, this._onSubmitClick);
   }
 
-  _unbind() {}
+  _unbind() {
+    getElement(this._element, `.point__button--save`)
+      .removeEventListener(`click`, this._onSubmitClick);
+  }
 
   get element() {
     return this._element;
@@ -43,6 +47,7 @@ export class OpenPoint {
   }
 
   unrender() {
+    this._unbind();
     this._element = null;
   }
 }
