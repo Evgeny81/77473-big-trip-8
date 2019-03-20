@@ -1,13 +1,14 @@
 import openPointTemplate from '../templates/open-point';
-import {createElement, getElement} from '../utils/utils';
+import {getElement} from '../utils/utils';
+import Component from './component';
 
-export class OpenPoint {
+export class OpenPoint extends Component {
   constructor(data) {
+    super();
     this.description = data.description;
     this.offers = data.offers;
     this.price = data.price;
     this.picture = data.picture;
-    this._element = null;
     this._onSubmit = null;
     this._onSubmitClick = this._onSubmitClick.bind(this);
   }
@@ -21,33 +22,18 @@ export class OpenPoint {
     return typeof this._onSubmit === `function` && this._onSubmit();
   }
 
-  _bind() {
+  bind() {
     getElement(this._element, `.point__button--save`)
       .addEventListener(`click`, this._onSubmitClick);
   }
 
-  _unbind() {
+  unbind() {
     getElement(this._element, `.point__button--save`)
       .removeEventListener(`click`, this._onSubmitClick);
-  }
-
-  get element() {
-    return this._element;
   }
 
   get template() {
     const {description, offers, price, picture} = this;
     return openPointTemplate({description, offers, price, picture});
-  }
-
-  render() {
-    this._element = createElement(this.template);
-    this._bind();
-    return this._element;
-  }
-
-  unrender() {
-    this._unbind();
-    this._element = null;
   }
 }

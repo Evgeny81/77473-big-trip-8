@@ -1,3 +1,6 @@
+import {OpenPoint} from '../components/open-point';
+import {Point} from '../components/point';
+
 export const getElement = (container, selector) => (
   container.querySelector(selector)
 );
@@ -36,4 +39,26 @@ export const createElement = (template) => {
   const wrapper = document.createElement(`div`);
   wrapper.innerHTML = template;
   return wrapper.firstChild;
+};
+
+export const createPoint = (container, config) => {
+  const point = new Point(config());
+  const openPoint = new OpenPoint(config());
+  container.appendChild(point.render());
+
+  point.onClick = () => {
+    openPoint.render();
+    container.replaceChild(openPoint.element, point.element);
+    point.unrender();
+  };
+
+  openPoint.onSubmit = () => {
+    point.render();
+    container.replaceChild(point.element, openPoint.element);
+    openPoint.unrender();
+  };
+};
+
+export const clearBoard = (container) => {
+  container.innerHTML = ``;
 };
