@@ -8,8 +8,11 @@ export class Point {
     this._price = data.price;
     this._timeHours = data.timeHours;
     this._timeMinutes = data.timeMinutes;
+    this._startDate = data.startDate;
+    this._endDate = data.endDate;
     this._element = null;
     this._onClick = null;
+    this._onClickWrapper = this._onClickWrapper.bind(this);
   }
 
   set onClick(fn) {
@@ -26,14 +29,17 @@ export class Point {
 
   _bind() {
     this._element
-      .addEventListener(`click`, this._onClickWrapper.bind(this));
+      .addEventListener(`click`, this._onClickWrapper);
   }
 
   unrender() {
+    this._unbind();
     this._element = null;
   }
 
-  _unbind() {}
+  _unbind() {
+    this._element.removeEventListener(`click`, this._onClickWrapper);
+  }
 
   get template() {
     const {
@@ -41,9 +47,11 @@ export class Point {
       _icon: icon,
       _price: price,
       _timeHours: timeHours,
-      _timeMinutes: timeMinutes
+      _timeMinutes: timeMinutes,
+      _startDate: startDate,
+      _endDate: endDate
     } = this;
-    return pointTemplate({type, icon, price, timeHours, timeMinutes});
+    return pointTemplate({type, icon, price, timeHours, timeMinutes, startDate, endDate});
   }
 
   render() {
